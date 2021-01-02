@@ -1,6 +1,6 @@
-# counter_challenge
+# counter
 
-A new Flutter application.
+A basic flutter counter with beautiful animations.
 
 ## Getting Started
 
