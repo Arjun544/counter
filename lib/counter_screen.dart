@@ -90,102 +90,75 @@ class _CounterScreenState extends State<CounterScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        title: Text(
-          widget.title,
-          style:
-              TextStyle(color: Color(0xFF0f3057), fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: Center(
-        child: Stack(
-          children: [
-            Container(
-              width: size.width,
-              height: size.height,
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Positioned(
-                    left: widget.direction == Axis.horizontal ? 0.0 : null,
-                    bottom: widget.direction == Axis.horizontal
-                        ? null
-                        : size.height / 4,
-                    child: RotatedBox(
-                      quarterTurns: 75,
-                      child: Icon(Icons.arrow_back_ios_rounded,
-                          size: 40.0,
-                          color: Colors.pinkAccent.withOpacity(0.5)),
-                    ),
-                  ),
-                  Positioned(
-                    right: widget.direction == Axis.horizontal ? 10.0 : null,
-                    top: widget.direction == Axis.horizontal
-                        ? null
-                        : size.height / 4,
-                    child: RotatedBox(
-                      quarterTurns: 75,
-                      child: Icon(Icons.arrow_forward_ios_rounded,
-                          size: 40.0,
-                          color: Colors.pinkAccent.withOpacity(0.5)),
-                    ),
-                  ),
-                  GestureDetector(
-                    onHorizontalDragStart: _onPanStart,
-                    onHorizontalDragUpdate: _onPanUpdate,
-                    onHorizontalDragEnd: _onPanEnd,
-                    child: Center(
-                      child: SlideTransition(
-                        position: _slideAnimation,
-                        child: Container(
-                          height: 140,
-                          width: 140,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.pink,
-                              borderRadius: BorderRadius.circular(50),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.pink.withOpacity(0.5),
-                                  blurRadius: 30.0,
-                                  offset: Offset(0, 15),
-                                  spreadRadius: 2,
-                                ),
-                              ]),
-                          child: SlideTransition(
-                            position: _textAnimation,
-                            child: Text(
-                              '$_value',
-                              key: ValueKey<int>(_value),
-                              style: TextStyle(
-                                  color: Color(0xFF0f3057),
-                                  fontSize: 80.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text(
+              'Click & Drag',
+              style: TextStyle(
+                  color: Color(0xFF0f3057),
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+            Column(
+              children: [
+                RotatedBox(
+                  quarterTurns: 45,
+                  child: Icon(Icons.arrow_back_ios_rounded,
+                      size: 40.0, color: Colors.pinkAccent.withOpacity(0.5)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onHorizontalDragStart: _onPanStart,
+                  onHorizontalDragUpdate: _onPanUpdate,
+                  onHorizontalDragEnd: _onPanEnd,
+                  child: Center(
+                    child: SlideTransition(
+                      position: _slideAnimation,
+                      child: Container(
+                        height: 140,
+                        width: 140,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.pink,
+                            borderRadius: BorderRadius.circular(50),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.pink.withOpacity(0.5),
+                                blurRadius: 30.0,
+                                offset: Offset(0, 15),
+                                spreadRadius: 2,
+                              ),
+                            ]),
+                        child: SlideTransition(
+                          position: _textAnimation,
+                          child: Text(
+                            '$_value',
+                            key: ValueKey<int>(_value),
+                            style: TextStyle(
+                                color: Color(0xFF0f3057),
+                                fontSize: 80.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Positioned.fill(
-              top: 70,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Click & Drag',
-                  style: TextStyle(
-                      color: Color(0xFF0f3057),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
                 ),
-              ),
+                SizedBox(
+                  height: 20,
+                ),
+                RotatedBox(
+                  quarterTurns: 45,
+                  child: Icon(Icons.arrow_forward_ios_rounded,
+                      size: 40.0, color: Colors.pinkAccent.withOpacity(0.5)),
+                ),
+              ],
             ),
           ],
         ),
