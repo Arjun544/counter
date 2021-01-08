@@ -75,7 +75,7 @@ class _CounterScreenState extends State<CounterScreen>
           Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(1.5, 0.0))
               .animate(_controller);
       _textAnimation =
-          Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, 1.2))
+          Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(2, 0.0))
               .animate(_controller);
     } else {
       _slideAnimation =
@@ -103,63 +103,126 @@ class _CounterScreenState extends State<CounterScreen>
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
-            Column(
-              children: [
-                RotatedBox(
-                  quarterTurns: 45,
-                  child: Icon(Icons.arrow_back_ios_rounded,
-                      size: 40.0, color: Colors.pinkAccent.withOpacity(0.5)),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onHorizontalDragStart: _onPanStart,
-                  onHorizontalDragUpdate: _onPanUpdate,
-                  onHorizontalDragEnd: _onPanEnd,
-                  child: Center(
-                    child: SlideTransition(
-                      position: _slideAnimation,
-                      child: Container(
-                        height: 140,
-                        width: 140,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.pink,
-                            borderRadius: BorderRadius.circular(50),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.pink.withOpacity(0.5),
-                                blurRadius: 30.0,
-                                offset: Offset(0, 15),
-                                spreadRadius: 2,
+            widget.direction == Axis.vertical
+                ? Column(
+                    children: [
+                      RotatedBox(
+                        quarterTurns: 45,
+                        child: Icon(Icons.arrow_back_ios_rounded,
+                            size: 40.0,
+                            color: Colors.pinkAccent.withOpacity(0.5)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onHorizontalDragStart: _onPanStart,
+                        onHorizontalDragUpdate: _onPanUpdate,
+                        onHorizontalDragEnd: _onPanEnd,
+                        child: Center(
+                          child: SlideTransition(
+                            position: _slideAnimation,
+                            child: Container(
+                              height: 140,
+                              width: 140,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(50),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.pink.withOpacity(0.5),
+                                      blurRadius: 30.0,
+                                      offset: Offset(0, 15),
+                                      spreadRadius: 2,
+                                    ),
+                                  ]),
+                              child: SlideTransition(
+                                position: _textAnimation,
+                                child: Text(
+                                  '$_value',
+                                  key: ValueKey<int>(_value),
+                                  style: TextStyle(
+                                      color: Color(0xFF0f3057),
+                                      fontSize: 80.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ]),
-                        child: SlideTransition(
-                          position: _textAnimation,
-                          child: Text(
-                            '$_value',
-                            key: ValueKey<int>(_value),
-                            style: TextStyle(
-                                color: Color(0xFF0f3057),
-                                fontSize: 80.0,
-                                fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      RotatedBox(
+                        quarterTurns: 45,
+                        child: Icon(Icons.arrow_forward_ios_rounded,
+                            size: 40.0,
+                            color: Colors.pinkAccent.withOpacity(0.5)),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RotatedBox(
+                        quarterTurns: 0,
+                        child: Icon(Icons.arrow_back_ios_rounded,
+                            size: 40.0,
+                            color: Colors.pinkAccent.withOpacity(0.5)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onHorizontalDragStart: _onPanStart,
+                        onHorizontalDragUpdate: _onPanUpdate,
+                        onHorizontalDragEnd: _onPanEnd,
+                        child: Center(
+                          child: SlideTransition(
+                            position: _slideAnimation,
+                            child: Container(
+                              height: 140,
+                              width: 140,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(50),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.pink.withOpacity(0.5),
+                                      blurRadius: 30.0,
+                                      offset: Offset(0, 15),
+                                      spreadRadius: 2,
+                                    ),
+                                  ]),
+                              child: SlideTransition(
+                                position: _textAnimation,
+                                child: Text(
+                                  '$_value',
+                                  key: ValueKey<int>(_value),
+                                  style: TextStyle(
+                                      color: Color(0xFF0f3057),
+                                      fontSize: 80.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      RotatedBox(
+                        quarterTurns: 60,
+                        child: Icon(Icons.arrow_forward_ios_rounded,
+                            size: 40.0,
+                            color: Colors.pinkAccent.withOpacity(0.5)),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                RotatedBox(
-                  quarterTurns: 45,
-                  child: Icon(Icons.arrow_forward_ios_rounded,
-                      size: 40.0, color: Colors.pinkAccent.withOpacity(0.5)),
-                ),
-              ],
-            ),
           ],
         ),
       ),
